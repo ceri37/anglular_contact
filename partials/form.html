@@ -1,0 +1,34 @@
+<header class="bar bar-nav">
+    <a class="btn btn-link pull-right" ng-click="save()">
+        <strong>Save</strong>
+    </a>
+    <a class="btn btn-link pull-left" ng-click="back()">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">{{ isNew ? "New contact" : "Edit contact" }}</h1>
+</header>
+
+<div class="content">
+    <form class="input-group" name="targetForm">
+        <div ng-repeat="field in target.fields">
+            <div ng-if="[ 'text', 'tel', 'url' ].indexOf(field.type) !== -1">
+                <input type="{{ field.type }}" name="{{ field.name }}" placeholder="{{ field.title }}" ng-model="target[field.id]" ng-required="{{ field.required }}" />
+            </div>
+            <div ng-if="field.type == 'textarea'">
+                <textarea name="{{ field.name }}" placeholder="{{ field.title }}" ng-model="target[field.id]" ng-required="{{ field.required }}"></textarea>
+            </div>
+            <div ng-if="field.type == 'select'">
+                <select name="{{ field.name }}" ng-model="target[field.id]" ng-required="field.required" ng-multiple="field.multiple" ng-options="option.name for option in field.options track by option.id">
+                    <option value="">-- {{ field.title }} --</option>
+                </select>
+            </div>
+            <div ng-if="field.type == 'toggle'">
+                <label ng-repeat="option in field.options">
+                    <input type="{{ field.multiple ? 'checkbox' : 'radio' }}" name="{{ field.name }}" value="{{ option.id }}" ng-model="target[field.id]" />
+                    {{ option.name }}
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
