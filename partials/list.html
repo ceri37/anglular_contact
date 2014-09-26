@@ -1,0 +1,20 @@
+<header class="bar bar-nav">
+    <a class="icon icon-plus pull-right" href="#/add"></a>
+    <h1 class="title">Contacts</h1>
+</header>
+
+<div class="bar bar-standard bar-header-secondary">
+    <input type="search" placeholder="Search" ng-model="search.name" />
+</div>
+
+<div class="content">
+    <ul class="table-view">
+        <li class="table-view-cell media" ng-repeat="contact in contacts | filter:search">
+            <a class="navigate-right" href="#/edit/{{ contact.id }}" data-transition="slide-in">
+                <div class="media-body">
+                    {{ contact.name }}
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
